@@ -5,7 +5,7 @@
   "fields": [
     {
       "name": "station_id",
-      "type": "string"
+      "type": "int"
     },
     {
       "name": "train_id",
@@ -25,7 +25,7 @@
     },
     {
       "name": "prev_station_id",
-      "type": "string"
+      "type": "int"
     },
     {
       "name": "prev_direction",

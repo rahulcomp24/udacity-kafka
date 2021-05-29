@@ -34,7 +34,7 @@ def configure_connector():
     # Make sure to think about what an appropriate topic prefix would be, and how frequently Kafka
     # Connect should run this connector (hint: not very often!)
     # logger.info("connector code not completed skipping connector creation")
-    resp = requests.post(
+    resp = requests.put(
         KAFKA_CONNECT_URL,
         headers={"Content-Type": "application/json"},
         data=json.dumps(

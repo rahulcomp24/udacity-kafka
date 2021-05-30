@@ -108,7 +108,7 @@ class Weather(Producer):
         # resp.raise_for_status()
 
         response = requests.post(
-            f"{Weather.rest_proxy_url}/topics/{self.producer.topic_name}",
+            f"{Weather.rest_proxy_url}/topics/{self.topic_name}",
             headers={"Content-Type": "application/vnd.kafka.avro.v2+json"},
             data={
                 "key_schema": Weather.key_schema,

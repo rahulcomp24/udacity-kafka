@@ -110,13 +110,20 @@ class Weather(Producer):
         response = requests.post(
             f"{Weather.rest_proxy_url}/topics/{self.topic_name}",
             headers={"Content-Type": "application/vnd.kafka.avro.v2+json"},
-            data={
-                "key_schema": Weather.key_schema,
-                "value_schema": Weather.value_schema,
-                "records": [{"temperature": self.temp, "status": self.status}],
-            },
+            data=json.dumps(
+                {
+                    "key_schema": json.dumps(Weather.key_schema),
+                    "value_schema": json.dumps(Weather.value_schema),
+                    "records": [
+                        {
+                            "key": {"timestamp": self.time_millis()},
+                            "value": {"temperature": 22.12, "status": self.status.name},
+                        }
+                    ],
+                }
+            ),
         )
-
+        response.text
         response.raise_for_status()
 
         logger.debug(

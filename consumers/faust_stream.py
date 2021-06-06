@@ -1,7 +1,5 @@
 """Defines trends calculations for stations"""
 import logging
-from os import sched_get_priority_max
-
 import faust
 
 
@@ -34,9 +32,11 @@ class TransformedStation(faust.Record):
 #   places it into a new topic with only the necessary information.
 app = faust.App("stations-stream", broker="kafka://localhost:9092", store="memory://")
 # TODO: Define the input Kafka Topic. Hint: What topic did Kafka Connect output to?
-topic = app.topic("stations", value_type=Station)
+topic = app.topic("station.stations", value_type=Station)
 # TODO: Define the output Kafka Topic
-out_topic = app.topic("org.chicago.cta.stations.table.v1", partitions=1, value_type=TransformedStation)
+out_topic = app.topic(
+    "org.chicago.cta.stations.table.v1", partitions=1, value_type=TransformedStation
+)
 # TODO: Define a Faust Table
 table = app.Table(
     name="my_table",

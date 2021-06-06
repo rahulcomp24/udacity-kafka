@@ -53,7 +53,7 @@ def configure_connector():
                     "table.whitelist": "stations",  # TODO
                     "mode": "incrementing",  # TODO
                     "incrementing.column.name": "stop_id",  # TODO
-                    "topic.prefix": "stations",  # TODO
+                    "topic.prefix": "station.",  # TODO
                     "poll.interval.ms": "1000",  # TODO
                 },
             }

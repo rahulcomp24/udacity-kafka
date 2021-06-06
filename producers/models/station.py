@@ -33,7 +33,7 @@ class Station(Producer):
         # replicas
         #
         #
-        topic_name = f"station_{station_name}"
+        topic_name = f"station"
         super().__init__(
             topic_name,
             key_schema=Station.key_schema,

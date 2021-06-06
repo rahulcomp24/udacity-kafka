@@ -33,7 +33,7 @@ class Station(Producer):
         # replicas
         #
         #
-        topic_name = f"station"
+        topic_name = "org.chicago.cta.station"
         super().__init__(
             topic_name,
             key_schema=Station.key_schema,
@@ -65,7 +65,7 @@ class Station(Producer):
                 "train_id": train.train_id,
                 "direction": direction,
                 "line": self.color.name,
-                "train_status": "",
+                "train_status": "", # FIXME: Needs to be updated
                 "prev_station_id": prev_station_id,
                 "prev_direction": prev_direction,
             },

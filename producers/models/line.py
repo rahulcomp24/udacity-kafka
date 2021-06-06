@@ -26,6 +26,7 @@ class Line:
     def _build_line_data(self, station_df):
         """Constructs all stations on the line"""
         stations = station_df["station_name"].unique()
+        logger.info(f"Creating {len(stations)} stations.")
 
         station_data = station_df[station_df["station_name"] == stations[0]]
         line = [

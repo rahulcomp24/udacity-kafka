@@ -64,7 +64,7 @@ class KafkaConsumer:
         # logger.info("on_assign is incomplete - skipping")
         for partition in partitions:
             if self.offset_earliest:
-                partition.offset = "OFFSET_BEGINNING"
+                partition.offset = confluent_kafka.OFFSET_BEGINNING
 
         logger.info("partitions assigned for %s", self.topic_name_pattern)
         consumer.assign(partitions)
@@ -87,17 +87,14 @@ class KafkaConsumer:
         #
         #
         # logger.info("_consume is incomplete - skipping")
-        try:
-            message = self.consumer.poll()
-            if message is None:
-                return 0
-            elif message.error():
-                logger.error("Error", message.error())
-            else:
-                self.message_handler(message)
-                return 1
-        except:
-            logger.error("Failed to poll")
+        message = self.consumer.poll(1)
+        if message is None:
+            return 0
+        elif message.error():
+            logger.error("Error", message.error())
+        else:
+            self.message_handler(message)
+            return 1
         return 0
 
     def close(self):

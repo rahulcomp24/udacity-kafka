@@ -38,6 +38,7 @@ class KafkaConsumer:
         #
         self.broker_properties = {
             "bootstrap.servers": "localhost:9092",
+            "group.id": 1
             # "schema.registry.url": "http://localhost:8081",
         }
 

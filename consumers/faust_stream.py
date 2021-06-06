@@ -34,6 +34,7 @@ class TransformedStation(faust.Record, serializer="json"):
 app = faust.App("stations-stream", broker="kafka://localhost:9092", store="memory://")
 topic = app.topic(
     "org.chicago.stations",
+    value_type=Station,
 )
 
 out_topic = app.topic(
@@ -61,6 +62,7 @@ table = app.Table(
 @app.agent(topic)
 async def transform_table(stations):
     async for station in stations:
+        print(f"Processing {station}")
         await out_topic.send(
             key=str(station.station_id),
             value={

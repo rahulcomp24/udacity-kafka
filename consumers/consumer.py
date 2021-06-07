@@ -38,8 +38,8 @@ class KafkaConsumer:
         #
         self.broker_properties = {
             "bootstrap.servers": "localhost:9092",
-            "group.id": 1
-            # "schema.registry.url": "http://localhost:8081",
+            "group.id": 'webapp',
+            "auto.offset.reset": "earliest"
         }
 
         # TODO: Create the Consumer, using the appropriate type.

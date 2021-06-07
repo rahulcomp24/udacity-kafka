@@ -63,20 +63,17 @@ table = app.Table(
 async def transform_table(stations):
     async for station in stations:
         print(f"Processing {station}")
-        await out_topic.send(
-            key=str(station.station_id),
-            value={
-                "station_id": station.station_id,
-                "station_name": station.station_name,
-                "order": station.order,
-                "line": "red"
-                if station.red
-                else "blue"
-                if station.blue
-                else "green"
-                if station.green
-                else "other",
-            },
+        table[station.station_id] = TransformedStation(
+            station_id=station.station_id,
+            station_name=station.station_name,
+            order=station.order,
+            line="red"
+            if station.red
+            else "blue"
+            if station.blue
+            else "green"
+            if station.green
+            else "other",
         )
 
 
